@@ -7,7 +7,7 @@ class SignInPage(Page):
     CONTINUE_BTN = (By.CSS_SELECTOR, '.login-button')
 
     username = 'kbkalp8@gmail.com'
-    password = 'Jigidi@98765'
+    password = '************'
 
     def input_username(self):
         self.input_text(self.username, *self.USERNAME_FIELD)

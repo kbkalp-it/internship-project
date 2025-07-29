@@ -16,7 +16,7 @@ class LanguageSettingPage(Page):
         # Used ActionChains here because the dropdown requires a mouse hover
         # to trigger the visibility of the language options. A regular .click()
         # does not work as the element remains unselectable until hovered over.
-        ActionChains(self.driver).move_to_element(toggle).perform()
+        ActionChains(self.driver).move_to_element(toggle).click().perform()
         self.driver.implicitly_wait(1)
         print("Dropdown clicked")
         ru_option = self.driver.wait.until(EC.visibility_of_element_located(self.LANGUAGE_OPTION_RU))

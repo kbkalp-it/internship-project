@@ -1,3 +1,4 @@
+# from requests import options
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support.wait import WebDriverWait
@@ -12,7 +13,7 @@ def browser_init(context, scenario_name):
     """
     driver_path = ChromeDriverManager().install()
     service = Service(driver_path)
-    context.driver = webdriver.Chrome(service=service)
+    # context.driver = webdriver.Chrome(service=service)
     #### Safari and Firefox browser ###
     # context.driver = webdriver.Firefox()
     # context.driver = webdriver.Safari()
@@ -23,6 +24,7 @@ def browser_init(context, scenario_name):
     # context.driver = webdriver.Chrome(
     #     options=options
     # )
+
     ### BROWSERSTACK ###
     # Register for BrowserStack, then grab it from https://www.browserstack.com/accounts/settings
     # bs_user =''
@@ -36,8 +38,22 @@ def browser_init(context, scenario_name):
     #     'browserName': 'Edge',
     #     'sessionName': scenario_name,
     # }
+    ### Browser Stack Mobile Web ###
+    # bstack_options = {
+    #     "deviceName": "Samsung Galaxy S22 Ultra",
+    #     "platformName": "Android",
+    #     'browserName': 'Chrome',
+    #     'sessionName': scenario_name,
+    #     "interactiveDebugging": "True"
+    # }
     # options.set_capability('bstack:options', bstack_options)
     # context.driver = webdriver.Remote(command_executor=url, options=options)
+
+    ### Mobile automation testing ###
+    mobile_emulation = {"deviceName": "Nexus 5"}
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_experimental_option("mobileEmulation", mobile_emulation)
+    context.driver = webdriver.Chrome(service=service, options=chrome_options)
 
     context.driver.maximize_window()
     context.driver.implicitly_wait(4)
